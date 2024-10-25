@@ -26,6 +26,8 @@ app.get('/', (req, res)=> { // request and response arguements
 
 app.get('/users', userController.getAllUsers)
 
+app.get('/users/:username', userController.getUserByName)
+
 app.post('/users', userController.createUser)
 
 app.put('/users/:id', userController.updateUser)
@@ -34,6 +36,9 @@ app.delete('/users/:id', userController.deleteUser)
 
 
 app.get('/reminders', reminderController.getAllReminders);
+app.get('/reminders/user/:userid', reminderController.getReminderByUser);
+
+//app.get('/reminders/:userid/:givenNumber/', reminderController.getReminderByDateAndUser);
 
 app.post('/reminders', reminderController.createReminder);
 

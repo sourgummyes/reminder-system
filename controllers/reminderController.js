@@ -39,6 +39,20 @@ const getReminderByName = async (req, res) => {
     }
 }
 
+const getReminderByUser = async (req, res) => {
+    try {
+        const { userid } = req.params; 
+        
+        const reminders = await Reminder.find({ user_id: userid }); 
+        if (reminders.length > 0) {
+            return res.json(reminders);
+        }
+        return res.status(404).send(`No reminders found for user ID "${userid}"!`);
+    } catch (error) {
+        return res.status(500).send(error.message);
+    }
+}
+
 // CREATE - app.post
 const createReminder = async (req, res) => {
     try {
@@ -82,6 +96,7 @@ module.exports = {
     getAllReminders,
     getReminderById,
     getReminderByName,
+    getReminderByUser,
     createReminder,
     updateReminder,
     deleteReminder
